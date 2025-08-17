@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POS System – Modern UI</title>
+  <style>
+    :root{
+      --bg:#0f1220;          /* deep slate */
+      --panel:#171a2b;       /* panel base */
+      --card:#1e2237;        /* cards */
+      --muted:#8c93ad;       /* muted text */
+      --text:#eef1ff;        /* main text */
+      --brand:#6d7cff;       /* accent */
+      --brand-2:#21d4fd;     /* gradient 1 */
+      --brand-3:#b721ff;     /* gradient 2 */
+      --ok:#35c759;          /* success */
+      --warn:#ffb020;        /* warn */
+      --danger:#ff5a5f;      /* danger */
+      --border:rgba(255,255,255,.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius-xl:20px; --radius-lg:14px; --radius:10px; --radius-sm:8px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font: 14px/1.35 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+      color:var(--text); background:
+        radial-gradient(1000px 600px at -10% -20%, #252846 0%, transparent 60%),
+        radial-gradient(900px 500px at 120% -10%, #1b1e33 0%, transparent 60%),
+        var(--bg);
+    }
+    .app{
+      display:grid; grid-template-columns: 1.35fr .95fr; gap:16px; padding:16px; height:100vh; max-width:1400px; margin:0 auto;
+    }
+    header.appbar{
+      grid-column: 1 / -1; display:flex; align-items:center; gap:12px; padding:14px 16px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.00));
+      border:1px solid var(--border); border-radius: var(--radius-xl);
+      position:sticky; top:12px; z-index:20; backdrop-filter: blur(10px);
+    }
+    .logo{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px}
+    .logo .badge{width:36px; height:36px; border-radius:12px; background: conic-gradient(from 120deg, var(--brand-2), var(--brand-3), var(--brand)); display:grid; place-items:center; box-shadow: var(--shadow);}
+    .logo svg{filter: drop-shadow(0 6px 18px rgba(109,124,255,.45));}
+    .searchbar{flex:1; display:flex; gap:10px}
+    .searchbar input{
+      flex:1; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:var(--card); color:var(--text);
+      outline:none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+    .pillbtn{padding:10px 14px; border-radius:999px; border:1px solid var(--border); background:var(--card); color:var(--text); cursor:pointer}
+    .pillbtn:hover{filter:brightness(1.1)}
+    .pillbtn:active{transform: translateY(1px)}
+    .kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#0b0d17; border:1px solid var(--border); padding:2px 6px; border-radius:6px; color:#c9cff8}
+
+    .wrap{display:grid; grid-template-columns: 1fr 1fr; gap:16px}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)); border:1px solid var(--border); border-radius: var(--radius-xl); box-shadow: var(--shadow);}
+
+    /* Catalog */
+    .catalog{padding:14px}
+    .tabs{display:flex; gap:8px; flex-wrap:wrap; margin:4px 0 12px}
+    .tab{padding:8px 12px; border-radius:999px; border:1px solid var(--border); background: #12152a; color:#cdd3ff; cursor:pointer;}
+    .tab.active{background: linear-gradient(90deg, rgba(109,124,255,.2), rgba(33,212,253,.2)); border-color: rgba(109,124,255,.6)}
+    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    @media (max-width:1200px){.grid{grid-template-columns: repeat(2, 1fr)} .app{grid-template-columns:1fr} }
+    @media (max-width:680px){.grid{grid-template-columns: 1fr}}
+
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius: var(--radius-lg); overflow:hidden; display:flex; flex-direction:column; min-height:170px;
+    }
+    .card .img{height:90px; background: radial-gradient(200px 80px at 20% 10%, rgba(255,255,255,.08), transparent 60%), linear-gradient(135deg, rgba(109,124,255,.16), rgba(33,212,253,.08)); display:grid; place-items:center}
+    .card .meta{padding:10px 12px; display:grid; gap:6px}
+    .title{font-weight:600}
+    .muted{color:var(--muted)}
+    .price{font-weight:700;}
+    .addbtn{margin-top:auto; display:flex; gap:8px; align-items:center; justify-content:center; padding:10px 12px; border-top:1px dashed var(--border); cursor:pointer;}
+    .addbtn button{width:100%; padding:10px 12px; border-radius:12px; background: linear-gradient(90deg, var(--brand), var(--brand-2)); color:white; border:none; cursor:pointer; font-weight:600}
+    .addbtn button:hover{filter:brightness(1.05)}
+
+    /* Cart */
+    .cart{display:flex; flex-direction:column; height:100%;}
+    .cart header{padding:14px 16px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border)}
+    .cart .body{padding:10px 12px; display:flex; flex-direction:column; gap:10px; overflow:auto; min-height:220px}
+    .cart .item{display:grid; grid-template-columns: 1fr auto; gap:8px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:10px}
+    .item .name{font-weight:600}
+    .qty{display:flex; align-items:center; gap:6px}
+    .qty button{width:28px; height:28px; border-radius:8px; border:1px solid var(--border); background:#11142b; color:#e8ecff; cursor:pointer}
+    .qty input{width:38px; text-align:center; border:1px solid var(--border); background:#0b0d1b; color:var(--text); border-radius:8px; padding:4px}
+    .rem{border:none; background:transparent; color:var(--danger); cursor:pointer}
+
+    .summary{margin-top:auto; border-top:1px solid var(--border); padding:12px}
+    .row{display:flex; justify-content:space-between; align-items:center; margin:6px 0}
+    .row.total{font-weight:800; font-size:18px}
+    .actions{display:flex; gap:8px; margin-top:10px}
+    .btn{flex:1; padding:12px; border:none; border-radius:12px; cursor:pointer; font-weight:700}
+    .btn.primary{background:linear-gradient(90deg, var(--brand-2), var(--brand)); color:white}
+    .btn.ghost{background:#0b0d1b; color:#cdd3ff; border:1px solid var(--border)}
+
+    .tiny{font-size:12px; color:var(--muted)}
+
+    /* Keypad */
+    .keypad{padding:14px; display:grid; grid-template-columns: repeat(4,1fr); gap:8px}
+    .key{padding:14px; border-radius:12px; border:1px solid var(--border); background:#0e1123; cursor:pointer; font-weight:700}
+    .key.ok{background:linear-gradient(90deg, rgba(53,199,89,.2), rgba(33,212,253,.16));}
+    .key.wide{grid-column: span 2}
+
+    /* Modal */
+    .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,.5)}
+    .modal.open{display:flex}
+    .sheet{width:min(680px, 92vw); background:var(--panel); border:1px solid var(--border); border-radius:20px; box-shadow: var(--shadow); overflow:hidden}
+    .sheet header{padding:14px 16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center}
+    .sheet .content{padding:16px}
+    .receipt{background:#0b0d1b; border:1px dashed var(--border); border-radius:12px; padding:12px}
+    .receipt h3{margin:6px 0 12px}
+    .receipt .rrow{display:flex; justify-content:space-between; margin:4px 0}
+
+    /* Badges */
+    .badge-chip{padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:#0c1023; display:inline-flex; align-items:center; gap:8px}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="appbar">
+      <div class="logo">
+        <div class="badge" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 7h16l-2 10H6L4 7z" stroke="white" stroke-width="1.5"/>
+            <circle cx="9" cy="20" r="1.5" fill="white"/>
+            <circle cx="17" cy="20" r="1.5" fill="white"/>
+          </svg>
+        </div>
+        <div>
+          POS <span class="muted">/ Modern</span>
+        </div>
+      </div>
+      <div class="searchbar">
+        <input id="search" type="search" placeholder="Search or scan (press / to focus)…" />
+        <button class="pillbtn" id="toggleTheme">Toggle theme</button>
+      </div>
+      <div class="tiny"><span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> to Checkout</div>
+    </header>
+
+    <!-- Left: Catalog & Keypad -->
+    <section class="panel catalog">
+      <div class="tabs" id="tabs"></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- Right: Cart -->
+    <section class="panel cart" aria-label="Cart">
+      <header>
+        <div style="display:flex; align-items:center; gap:8px">
+          <strong>Cart</strong>
+          <span id="cartCount" class="badge-chip tiny">0 items</span>
+        </div>
+        <button class="pillbtn" id="clearCart">Clear</button>
+      </header>
+      <div class="body" id="cartBody"></div>
+      <div class="summary">
+        <div class="row"><span>Customer</span><input id="customer" placeholder="Walk-in" style="width:58%; padding:8px 10px; border-radius:10px; border:1px solid var(--border); background:#0b0d1b; color:var(--text)" /></div>
+        <div class="row"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+        <div class="row"><span>Tax (8%)</span><strong id="tax">$0.00</strong></div>
+        <div class="row"><span>Discount</span><strong id="discount">-$0.00</strong></div>
+        <div class="row total"><span>Total</span><span id="total">$0.00</span></div>
+        <div class="actions">
+          <button class="btn ghost" id="hold">Hold</button>
+          <button class="btn primary" id="checkout">Checkout</button>
+        </div>
+        <div class="tiny" style="margin-top:6px">Payments: <span class="kbd">1</span> Cash · <span class="kbd">2</span> Card · <span class="kbd">3</span> QR</div>
+      </div>
+    </section>
+
+    <section class="panel keypad">
+      <!-- Quick keypad to tweak qty or add custom amount -->
+      <div class="key">7</div>
+      <div class="key">8</div>
+      <div class="key">9</div>
+      <div class="key">⌫</div>
+      <div class="key">4</div>
+      <div class="key">5</div>
+      <div class="key">6</div>
+      <div class="key">Qty +</div>
+      <div class="key">1</div>
+      <div class="key">2</div>
+      <div class="key">3</div>
+      <div class="key">Qty −</div>
+      <div class="key wide">0</div>
+      <div class="key ok wide">Apply to selected</div>
+    </section>
+
+    <section class="panel" style="padding:14px">
+      <div style="display:grid; gap:8px">
+        <div style="display:flex; gap:8px">
+          <button class="pillbtn" data-pay="cash">Cash</button>
+          <button class="pillbtn" data-pay="card">Card</button>
+          <button class="pillbtn" data-pay="qr">QR</button>
+        </div>
+        <div class="tiny">Select a cart item, use keypad to adjust quantity. Search with <span class="kbd">/</span>. Remove with <span class="kbd">Del</span>. Checkout with <span class="kbd">Ctrl</span>+<span class="kbd">Enter</span>.</div>
+        <div class="tiny">Holds persist in this browser (localStorage).</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal: Receipt -->
+  <div class="modal" id="receiptModal" role="dialog" aria-modal="true">
+    <div class="sheet">
+      <header>
+        <strong>Receipt</strong>
+        <button class="pillbtn" id="closeReceipt">Close</button>
+      </header>
+      <div class="content">
+        <div class="receipt" id="receiptArea"></div>
+        <div style="display:flex; gap:8px; margin-top:12px">
+          <button class="btn ghost" id="printReceipt">Print</button>
+          <button class="btn primary" id="doneReceipt">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  /*** Demo Data ***/
+  const PRODUCTS = [
+    {id:'c1', name:'Cappuccino', price:3.5, category:'Coffee'},
+    {id:'c2', name:'Espresso', price:2.8, category:'Coffee'},
+    {id:'c3', name:'Latte', price:3.8, category:'Coffee'},
+    {id:'t1', name:'Green Tea', price:2.2, category:'Tea'},
+    {id:'t2', name:'Milk Tea', price:2.5, category:'Tea'},
+    {id:'t3', name:'Lemon Tea', price:2.3, category:'Tea'},
+    {id:'p1', name:'Blueberry Muffin', price:2.0, category:'Pastry'},
+    {id:'p2', name:'Croissant', price:2.4, category:'Pastry'},
+    {id:'p3', name:'Chocolate Donut', price:1.9, category:'Pastry'},
+    {id:'s1', name:'Chicken Sandwich', price:4.5, category:'Snacks'},
+    {id:'s2', name:'Veg Wrap', price:4.0, category:'Snacks'},
+    {id:'s3', name:'Fries', price:2.7, category:'Snacks'}
+  ];
+  const CATEGORIES = ['All', ...Array.from(new Set(PRODUCTS.map(p=>p.category)))];
+  const TAX_RATE = 0.08;
+
+  /*** State ***/
+  let filter = {q:'', cat:'All'};
+  let cart = {}; // id -> {id, name, price, qty}
+  let selectedItemId = null;
+  let holdKey = 'pos.holds';
+  let themeKey = 'pos.theme';
+
+  /*** Utils ***/
+  const $ = (q)=>document.querySelector(q);
+  const $$ = (q)=>Array.from(document.querySelectorAll(q));
+  const fmt = (n)=>`$${n.toFixed(2)}`;
+
+  /*** Render Tabs & Grid ***/
+  function renderTabs(){
+    const el = $('#tabs');
+    el.innerHTML = '';
+    CATEGORIES.forEach(cat=>{
+      const b = document.createElement('button');
+      b.className = 'tab'+(filter.cat===cat?' active':'');
+      b.textContent = cat;
+      b.onclick = ()=>{filter.cat=cat; renderGrid();};
+      el.appendChild(b);
+    });
+  }
+  function renderGrid(){
+    const el = $('#grid');
+    const q = filter.q.toLowerCase();
+    const list = PRODUCTS.filter(p => (filter.cat==='All' || p.category===filter.cat) && p.name.toLowerCase().includes(q));
+    el.innerHTML = '';
+    list.forEach(p=>{
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="img"><div class="badge-chip tiny">${p.category}</div></div>
+        <div class="meta">
+          <div class="title">${p.name}</div>
+          <div class="muted">${p.id}</div>
+          <div class="price">${fmt(p.price)}</div>
+        </div>
+        <div class="addbtn"><button aria-label="Add ${p.name}">Add to Cart</button></div>
+      `;
+      card.querySelector('button').onclick = ()=> addToCart(p.id);
+      el.appendChild(card);
+    });
+  }
+
+  /*** Cart logic ***/
+  function addToCart(id, qty=1){
+    const p = PRODUCTS.find(x=>x.id===id);
+    if(!p) return;
+    const item = cart[id] || {id:p.id, name:p.name, price:p.price, qty:0};
+    item.qty += qty; cart[id]=item; selectedItemId=id; updateCartUI();
+  }
+  function removeFromCart(id){ delete cart[id]; if(selectedItemId===id) selectedItemId=null; updateCartUI(); }
+  function setQty(id, qty){ if(cart[id]){ cart[id].qty = Math.max(0, qty); if(cart[id].qty===0) delete cart[id]; updateCartUI(); }}
+
+  function totals(){
+    const items = Object.values(cart);
+    const subtotal = items.reduce((a,b)=>a + b.price*b.qty, 0);
+    const tax = subtotal*TAX_RATE;
+    const discount = 0; // extend as needed
+    const total = subtotal + tax - discount;
+    return {subtotal, tax, discount, total};
+  }
+
+  function updateCartUI(){
+    const body = $('#cartBody');
+    const items = Object.values(cart);
+    body.innerHTML = '';
+    items.forEach(it=>{
+      const row = document.createElement('div');
+      row.className = 'item';
+      row.tabIndex = 0; // focusable for keypad target
+      row.dataset.id = it.id;
+      row.innerHTML = `
+        <div>
+          <div class="name">${it.name}</div>
+          <div class="tiny">@ ${fmt(it.price)} · ${fmt(it.price*it.qty)}</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px">
+          <div class="qty">
+            <button aria-label="decrease">−</button>
+            <input inputmode="numeric" value="${it.qty}"/>
+            <button aria-label="increase">+</button>
+          </div>
+          <button class="rem" title="remove">✕</button>
+        </div>
+      `;
+      if(selectedItemId===it.id) row.style.outline = '2px solid rgba(109,124,255,.7)';
+      row.onclick = ()=>{ selectedItemId = it.id; updateCartUI(); };
+      const [minus, qtyInput, plus] = row.querySelectorAll('.qty > *');
+      minus.onclick = (e)=>{e.stopPropagation(); setQty(it.id, it.qty-1)};
+      plus.onclick  = (e)=>{e.stopPropagation(); setQty(it.id, it.qty+1)};
+      qtyInput.onchange = (e)=>{ e.stopPropagation(); const v = parseInt(e.target.value||'0',10)||0; setQty(it.id, v); };
+      row.querySelector('.rem').onclick = (e)=>{ e.stopPropagation(); removeFromCart(it.id); };
+      body.appendChild(row);
+    });
+
+    $('#cartCount').textContent = `${items.reduce((a,b)=>a+b.qty,0)} item${items.length!==1?'s':''}`;
+    const t = totals();
+    $('#subtotal').textContent = fmt(t.subtotal);
+    $('#tax').textContent = fmt(t.tax);
+    $('#discount').textContent = `-${fmt(t.discount).slice(1)}`;
+    $('#total').textContent = fmt(t.total);
+  }
+
+  /*** Search & Theme ***/
+  $('#search').addEventListener('input', (e)=>{ filter.q = e.target.value; renderGrid(); });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === '/' && document.activeElement !== $('#search')){ e.preventDefault(); $('#search').focus(); }
+    if(e.key === 'Delete' && selectedItemId){ removeFromCart(selectedItemId); }
+    if(e.ctrlKey && e.key === 'Enter'){ doCheckout(); }
+    if(['1','2','3'].includes(e.key)){
+      const pay = e.key==='1'?'cash':(e.key==='2'?'card':'qr');
+      setPayment(pay);
+    }
+  });
+
+  $('#toggleTheme').onclick = ()=>{
+    document.body.classList.toggle('light');
+    localStorage.setItem(themeKey, document.body.classList.contains('light')?'light':'dark');
+  }
+
+  // Light theme overrides
+  const styleLight = document.createElement('style');
+  styleLight.textContent = `
+    body.light{ --bg:#f6f7fb; --panel:#ffffff; --card:#ffffff; --text:#0e1220; --muted:#5c6073; --border:rgba(10,16,60,.08); }
+    body.light .card .img{ background: radial-gradient(200px 80px at 20% 10%, rgba(0,0,0,.05), transparent 60%), linear-gradient(135deg, rgba(109,124,255,.10), rgba(33,212,253,.03)); }
+  `;
+  document.head.appendChild(styleLight);
+  if(localStorage.getItem(themeKey)==='light') document.body.classList.add('light');
+
+  /*** Keypad behavior ***/
+  let keypadBuffer = '';
+  $$('.keypad .key').forEach(k=>{
+    k.onclick = ()=>{
+      const text = k.textContent.trim();
+      if(text==='⌫') keypadBuffer = keypadBuffer.slice(0,-1);
+      else if(text==='Qty +'){ applyKeypadToSelected(1); return; }
+      else if(text==='Qty −'){ applyKeypadToSelected(-1); return; }
+      else if(text==='Apply to selected'){ if(selectedItemId && keypadBuffer){ setQty(selectedItemId, parseInt(keypadBuffer,10)||0); keypadBuffer=''; } return; }
+      else keypadBuffer += text.replace(/\D/g,'');
+      k.classList.add('pulse'); setTimeout(()=>k.classList.remove('pulse'),200);
+    }
+  });
+  function applyKeypadToSelected(delta){ if(selectedItemId && cart[selectedItemId]){ setQty(selectedItemId, cart[selectedItemId].qty + delta); } }
+
+  /*** Payments & Holds ***/
+  function setPayment(type){
+    $$("[data-pay]").forEach(b=> b.classList.remove('active'));
+    const btn = document.querySelector(`[data-pay="${type}"]`);
+    if(btn){ btn.classList.add('active'); btn.style.outline='2px solid rgba(109,124,255,.5)'; setTimeout(()=>btn.style.outline='', 500); }
+  }
+  $("#clearCart").onclick = ()=>{ cart={}; selectedItemId=null; updateCartUI(); };
+  $("#hold").onclick = ()=>{
+    const holds = JSON.parse(localStorage.getItem(holdKey)||'[]');
+    const stamp = new Date().toLocaleString();
+    holds.push({at: stamp, customer: $('#customer').value||'Walk-in', cart});
+    localStorage.setItem(holdKey, JSON.stringify(holds));
+    alert('Sale held. You can restore it from localStorage (dev only).');
+    cart={}; updateCartUI();
+  };
+  $("#checkout").onclick = doCheckout;
+
+  function doCheckout(){
+    const items = Object.values(cart);
+    if(items.length===0){ alert('Cart is empty.'); return; }
+    const t = totals();
+    const orderId = 'ORD-' + Math.random().toString(36).slice(2,8).toUpperCase();
+    const pay = document.querySelector('[data-pay].active')?.dataset.pay || 'cash';
+    const customer = $('#customer').value||'Walk-in';
+    const receipt = [
+      `<div class="rrow"><strong>Order</strong><span>${orderId}</span></div>`,
+      `<div class="rrow"><span>Date</span><span>${new Date().toLocaleString()}</span></div>`,
+      `<div class="rrow"><span>Customer</span><span>${customer}</span></div>`,
+      `<hr style="border-color:var(--border)">`,
+      ...items.map(i=>`<div class="rrow"><span>${i.qty} × ${i.name}</span><span>${fmt(i.price*i.qty)}</span></div>`),
+      `<hr style="border-color:var(--border)">`,
+      `<div class="rrow"><span>Subtotal</span><strong>${fmt(t.subtotal)}</strong></div>`,
+      `<div class="rrow"><span>Tax</span><strong>${fmt(t.tax)}</strong></div>`,
+      `<div class="rrow"><span>Discount</span><strong>-${fmt(t.discount).slice(1)}</strong></div>`,
+      `<div class="rrow" style="font-size:18px; font-weight:800"><span>Total (${pay.toUpperCase()})</span><span>${fmt(t.total)}</span></div>`
+    ].join('');
+    $('#receiptArea').innerHTML = `<h3>Thanks for your purchase! ☕</h3>${receipt}`;
+    $('#receiptModal').classList.add('open');
+  }
+
+  $('#closeReceipt').onclick = ()=> $('#receiptModal').classList.remove('open');
+  $('#doneReceipt').onclick = ()=>{ $('#receiptModal').classList.remove('open'); cart={}; updateCartUI(); };
+  $('#printReceipt').onclick = ()=>{
+    const w = window.open('', 'PRINT', 'height=600,width=480');
+    w.document.write(`<html><head><title>Receipt</title><style>body{font-family:system-ui,Segoe UI,Roboto; padding:20px} .rrow{display:flex; justify-content:space-between; margin:4px 0} hr{border:none; border-top:1px dashed #999; margin:8px 0}</style></head><body>`);
+    w.document.write($('#receiptArea').innerHTML);
+    w.document.write('</body></html>'); w.document.close(); w.focus(); w.print(); w.close();
+  };
+
+  /*** Init ***/
+  renderTabs(); renderGrid(); updateCartUI();
+
+</script>
+</body>
+</html>
