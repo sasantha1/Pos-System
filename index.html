@@ -104,8 +104,16 @@
       cursor: pointer;
       transition: filter 0.2s, transform 0.1s;
     }
-    
-    
+    .pillbtn:hover { filter: brightness(1.1); }
+    .pillbtn:active { transform: translateY(1px); }
+    .kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: #0b0d17;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: #c9cff8;
+    }
     .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .panel {
       background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
