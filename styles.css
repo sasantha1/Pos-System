@@ -24,7 +24,12 @@ body {
   animation: fadeIn 1s ease-in-out;
 }
 
-
+.login-container h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.8rem;
+}
 
 label {
   font-size: 0.9rem;
