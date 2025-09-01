@@ -6,7 +6,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   const password = document.getElementById("password").value.trim();
 
   if (username && password) {
-    alert("Welcome, " + username + "!");
+    alert("Welcome, " + username + "*!");
     // TODO: Replace this with backend authentication (API call, etc.)
   } else {
     alert("Please fill in all fields!");
