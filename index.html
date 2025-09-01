@@ -590,7 +590,7 @@
   }
 
   /*** Cart Logic ***/
-  function addToCart(id, qty = 1) {
+  function addToCart(id, qty = 2) {
     const p = PRODUCTS.find(x => x.id === id);
     if (!p) return;
     const item = cart[id] || { id: p.id, name: p.name, price: p.price, qty: 0 };
