@@ -9,6 +9,6 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     alert("Welcome, " + username + "*!");
     // TODO: Replace this with backend authentication (API call, etc.)
   } else {
-    alert("Please fill in all fields!");
+    alert("Please fill in all fields continue !");
   }
 });
