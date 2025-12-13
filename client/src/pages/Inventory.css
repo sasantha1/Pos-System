@@ -1,0 +1,70 @@
+.inventory-page {
+  padding: 2rem;
+}
+
+.inventory-table-container {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.inventory-table thead {
+  background: var(--light);
+}
+
+.inventory-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--dark);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.inventory-table td {
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.type-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.type-badge.purchase,
+.type-badge.add {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+}
+
+.type-badge.sale,
+.type-badge.remove {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.type-badge.adjustment {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+}
+
+.positive {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.negative {
+  color: var(--danger);
+  font-weight: 600;
+}
+

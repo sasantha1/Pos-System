@@ -1,0 +1,157 @@
+.sales-page {
+  padding: 2rem;
+}
+
+.date-filters {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.date-filters input {
+  padding: 0.75rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.sales-table-container {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-top: 1.5rem;
+}
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sales-table thead {
+  background: var(--light);
+}
+
+.sales-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--dark);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sales-table td {
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.total-amount {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.completed {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+}
+
+.status-badge.pending {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+}
+
+.status-badge.cancelled,
+.status-badge.refunded {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.btn-view {
+  padding: 0.5rem 1rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--info);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.btn-view:hover {
+  background: var(--info);
+  color: white;
+}
+
+.sale-details {
+  max-width: 700px;
+}
+
+.sale-info {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--light);
+  border-radius: 8px;
+}
+
+.sale-info p {
+  margin-bottom: 0.5rem;
+}
+
+.sale-items {
+  margin-bottom: 1.5rem;
+}
+
+.sale-items h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.sale-items table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sale-items th,
+.sale-items td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.sale-items th {
+  background: var(--light);
+  font-weight: 600;
+}
+
+.sale-totals {
+  border-top: 2px solid var(--border);
+  padding-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.total-row.final {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+}
+
