@@ -39,6 +39,25 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.post('/auth/login', { email, password });
       const { token, user } = response.data;
+      
+      if (!token || !user) {
+        throw new Error('Invalid response from server');
+      }
+      
+      localStorage.setItem('token', token);
+      setUser(user);
+      return user;
+    } catch (error) {
+      // Clear any invalid token
+      localStorage.removeItem('token');
+      throw error;
+    }
+  };
+
+  const register = async (name, email, password) => {
+    try {
+      const response = await api.post('/auth/signup', { name, email, password });
+      const { token, user } = response.data;
       localStorage.setItem('token', token);
       setUser(user);
       return user;
@@ -56,6 +75,7 @@ export const AuthProvider = ({ children }) => {
     user,
     loading,
     login,
+    register,
     logout,
     fetchUser
   };
