@@ -29,13 +29,62 @@ router.post('/register', [
 
     const { name, email, password, role, branch } = req.body;
 
+    // Normalize email to lowercase
+    const normalizedEmail = email.toLowerCase().trim();
+
     // Check if user exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    const user = new User({ name, email, password, role, branch });
+    const user = new User({ name, email: normalizedEmail, password, role, branch });
+    await user.save();
+
+    const token = generateToken(user._id, user.role);
+
+    res.status(201).json({
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   POST /api/auth/signup
+// @desc    Sign up a new user (public)
+// @access  Public
+router.post('/signup', [
+  body('name').trim().notEmpty().withMessage('Name is required'),
+  body('email').isEmail().withMessage('Please provide a valid email'),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, email, password } = req.body;
+
+    // Normalize email to lowercase
+    const normalizedEmail = email.toLowerCase().trim();
+
+    // Check if user exists
+    const existingUser = await User.findOne({ email: normalizedEmail });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists with this email' });
+    }
+
+    // Create user with default role 'cashier'
+    const user = new User({ name, email: normalizedEmail, password, role: 'cashier' });
     await user.save();
 
     const token = generateToken(user._id, user.role);
@@ -70,7 +119,10 @@ router.post('/login', [
 
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    // Normalize email to lowercase for consistent lookup
+    const normalizedEmail = email.toLowerCase().trim();
+    
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -79,11 +131,18 @@ router.post('/login', [
       return res.status(401).json({ message: 'Account is deactivated' });
     }
 
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
+    // Compare password
+    try {
+      const isMatch = await user.comparePassword(password);
+      if (!isMatch) {
+        return res.status(401).json({ message: 'Invalid credentials' });
+      }
+    } catch (error) {
+      console.error('Password comparison error:', error);
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
+    // Update lastLogin - password won't be re-hashed due to isModified check in pre-save hook
     user.lastLogin = new Date();
     await user.save();
 
