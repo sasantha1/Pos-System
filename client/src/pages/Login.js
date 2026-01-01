@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { FiLogIn, FiMail, FiLock, FiShoppingCart } from 'react-icons/fi';
@@ -9,23 +9,54 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (!authLoading && user) {
+      const from = location.state?.from?.pathname || '/';
+      navigate(from, { replace: true });
+    }
+  }, [user, authLoading, navigate, location]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!email || !password) {
+      toast.error('Please fill in all fields');
+      return;
+    }
+
     setLoading(true);
 
     try {
-      await login(email, password);
+      await login(email.trim().toLowerCase(), password);
       toast.success('Login successful!');
-      navigate('/');
+      const from = location.state?.from?.pathname || '/';
+      navigate(from, { replace: true });
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Login failed');
+      const errorMessage = error.response?.data?.message || 
+                          error.response?.data?.errors?.[0]?.msg ||
+                          error.message ||
+                          'Login failed. Please check your credentials.';
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
   };
+
+  // Show loading state while checking authentication
+  if (authLoading) {
+    return (
+      <div className="login-container">
+        <div className="login-card">
+          <div style={{ textAlign: 'center', padding: '2rem' }}>Loading...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="login-container">
@@ -70,7 +101,12 @@ const Login = () => {
           </button>
         </form>
         <div className="login-footer">
-          <p>Default: admin@pos.com / admin123</p>
+          <p>
+            Don't have an account? <Link to="/signup">Sign Up</Link>
+          </p>
+          <p style={{ marginTop: '0.5rem', fontSize: '0.85rem' }}>
+            Default: admin@pos.com / admin123
+          </p>
         </div>
       </div>
     </div>
