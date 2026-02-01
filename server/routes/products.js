@@ -119,6 +119,9 @@ router.post('/', [auth, authorize('admin', 'manager')], [
   }
 });
 
+// NOTE: removed duplicate simplified POST route to ensure server-side
+// validation (costPrice/sellingPrice) is enforced by the single POST handler above.
+
 // @route   PUT /api/products/:id
 // @desc    Update product
 // @access  Private (Manager, Admin)

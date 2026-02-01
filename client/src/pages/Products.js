@@ -51,11 +51,20 @@ const Products = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // ensure numeric fields are numbers before sending
+      const payload = {
+        ...formData,
+        costPrice: parseFloat(formData.costPrice) || 0,
+        sellingPrice: parseFloat(formData.sellingPrice) || 0,
+        stock: parseInt(formData.stock, 10) || 0,
+        lowStockThreshold: parseInt(formData.lowStockThreshold, 10) || 0
+      };
+
       if (editingProduct) {
-        await api.put(`/products/${editingProduct._id}`, formData);
+        await api.put(`/products/${editingProduct._id}`, payload);
         toast.success('Product updated successfully');
       } else {
-        await api.post('/products', formData);
+        await api.post('/products', payload);
         toast.success('Product created successfully');
       }
       setShowModal(false);
@@ -99,7 +108,7 @@ const Products = () => {
       name: '',
       sku: '',
       barcode: '',
-      category: '',
+      category: categories && categories.length > 0 ? categories[0]._id : '',
       costPrice: '',
       sellingPrice: '',
       stock: '',
@@ -155,11 +164,11 @@ const Products = () => {
                   <td>{product.name}</td>
                   <td>{product.sku}</td>
                   <td>{product.category?.name || 'N/A'}</td>
-                  <td>${product.costPrice.toFixed(2)}</td>
-                  <td>${product.sellingPrice.toFixed(2)}</td>
+                  <td>${(product.costPrice || 0).toFixed(2)}</td>
+                  <td>${(product.sellingPrice || 0).toFixed(2)}</td>
                   <td>
-                    <span className={`stock-badge ${product.stock <= product.lowStockThreshold ? 'low' : ''}`}>
-                      {product.stock}
+                    <span className={`stock-badge ${(product.stock || 0) <= (product.lowStockThreshold || 0) ? 'low' : ''}`}>
+                      {product.stock != null ? product.stock : 0}
                     </span>
                   </td>
                   <td>
