@@ -1,0 +1,104 @@
+.lg-root {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 20% 10%, rgba(34, 197, 94, 0.14), transparent 38%), #0b0f15;
+  padding: 20px;
+}
+
+.lg-card {
+  width: min(420px, 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 15, 22, 0.92);
+  padding: 22px;
+}
+
+.lg-brand {
+  color: #22c55e;
+  font-weight: 1000;
+  font-size: 22px;
+}
+
+.lg-title {
+  margin-top: 8px;
+  color: #f9fafb;
+  font-weight: 1000;
+  font-size: 20px;
+}
+
+.lg-sub {
+  margin-top: 4px;
+  color: rgba(229, 231, 235, 0.64);
+  font-size: 13px;
+}
+
+.lg-quick {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.lg-quickBtn {
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(229, 231, 235, 0.88);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.lg-form {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lg-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: rgba(229, 231, 235, 0.78);
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.lg-input {
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #e5e7eb;
+  outline: none;
+  padding: 0 12px;
+}
+
+.lg-input:focus {
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+.lg-error {
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.lg-submit {
+  margin-top: 4px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  background: rgba(34, 197, 94, 0.9);
+  color: #06230f;
+  font-weight: 1000;
+  cursor: pointer;
+}
+
+.lg-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+

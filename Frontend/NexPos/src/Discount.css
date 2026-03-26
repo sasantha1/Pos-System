@@ -1,0 +1,443 @@
+.dis-page {
+  padding: 18px 0 26px;
+  color: rgba(255, 255, 255, 0.92);
+  min-height: 100%;
+}
+
+.dis-header {
+  padding: 0 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.dis-title {
+  font-size: 18px;
+  font-weight: 1000;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.dis-subtitle {
+  margin-top: 6px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.dis-addBtn {
+  height: 40px;
+  border-radius: 14px;
+  background: rgba(34, 197, 94, 0.95);
+  border: 1px solid rgba(34, 197, 94, 0.55);
+  color: #06230f;
+  cursor: pointer;
+  font-weight: 1000;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dis-plusIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.dis-statsRow {
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.dis-stat {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 16px 14px;
+  min-height: 92px;
+}
+
+.dis-statTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.dis-statLabel {
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.dis-cardIcon {
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dis-statValue {
+  margin-top: 12px;
+  font-size: 22px;
+  font-weight: 1000;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.dis-statValueActive {
+  color: rgba(34, 197, 94, 0.95);
+}
+
+.dis-statValueInactive {
+  color: rgba(239, 68, 68, 0.95);
+}
+
+.dis-card {
+  padding: 0 16px;
+}
+
+.dis-cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.dis-cardTitle {
+  font-weight: 1000;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.dis-searchWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 0 12px;
+  height: 38px;
+  min-width: 320px;
+}
+
+.dis-searchIcon {
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.dis-searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 800;
+}
+
+.dis-searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.dis-tableScroll {
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.15);
+  overflow-x: auto;
+}
+
+.dis-table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+}
+
+.dis-table thead th {
+  text-align: left;
+  font-size: 12px;
+  padding: 14px 14px;
+  font-weight: 1000;
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.015);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dis-table tbody td {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: middle;
+}
+
+.dis-cellName {
+  font-weight: 1000;
+}
+
+.dis-cellType {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.dis-cellValue {
+  font-weight: 1000;
+  color: rgba(34, 197, 94, 0.95);
+}
+
+.dis-cellCode {
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.2px;
+}
+
+.dis-actions {
+  display: inline-flex;
+  gap: 10px;
+}
+
+.dis-actionIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.dis-editBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dis-editBtn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dis-delBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(239, 68, 68, 0.22);
+  background: rgba(239, 68, 68, 0.08);
+  color: rgba(254, 202, 202, 0.95);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dis-delBtn:hover {
+  background: rgba(239, 68, 68, 0.13);
+}
+
+.dis-empty {
+  padding: 26px 14px;
+  text-align: center;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.dis-switch {
+  width: 46px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.dis-switch.active {
+  background: rgba(34, 197, 94, 0.22);
+  border-color: rgba(34, 197, 94, 0.45);
+}
+
+.dis-switch.inactive {
+  background: rgba(239, 68, 68, 0.14);
+  border-color: rgba(239, 68, 68, 0.32);
+}
+
+.dis-switchKnob {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  transition: transform 160ms ease;
+  transform: translateX(0);
+}
+
+.dis-switch.active .dis-switchKnob {
+  transform: translateX(20px);
+}
+
+.dis-modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.dis-modal {
+  width: 620px;
+  max-width: 100%;
+  border-radius: 18px;
+  background: #0a0f16;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.dis-modalHeader {
+  padding: 14px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dis-modalTitle {
+  font-weight: 1000;
+  font-size: 14px;
+}
+
+.dis-modalClose {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  font-weight: 1000;
+}
+
+.dis-modalClose:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.dis-modalBody {
+  padding: 16px 14px;
+}
+
+.dis-formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.dis-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.dis-labelText {
+  font-size: 12px;
+  font-weight: 1000;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 6px;
+}
+
+.dis-input {
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  outline: none;
+  padding: 0 14px;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 900;
+}
+
+.dis-labelStatus {
+  grid-column: 1 / -1;
+}
+
+.dis-statusRow {
+  display: flex;
+  gap: 10px;
+}
+
+.dis-statusPill {
+  flex: 1;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 1000;
+  cursor: pointer;
+}
+
+.dis-statusPill.active {
+  border-color: rgba(34, 197, 94, 0.45);
+  background: rgba(34, 197, 94, 0.14);
+  color: rgba(209, 250, 229, 0.95);
+}
+
+.dis-statusPill:not(.active) {
+  border-color: rgba(239, 68, 68, 0.24);
+}
+
+.dis-modalFooter {
+  padding: 14px 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dis-modalSecondary {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  font-weight: 1000;
+}
+
+.dis-modalPrimary {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 14px;
+  background: rgba(34, 197, 94, 0.95);
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  color: #06230f;
+  cursor: pointer;
+  font-weight: 1000;
+}
+
+@media (max-width: 980px) {
+  .dis-statsRow {
+    grid-template-columns: 1fr;
+  }
+  .dis-searchWrap {
+    min-width: 0;
+    width: 100%;
+  }
+  .dis-cardHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .dis-table {
+    min-width: 860px;
+  }
+  .dis-formGrid {
+    grid-template-columns: 1fr;
+  }
+}
+

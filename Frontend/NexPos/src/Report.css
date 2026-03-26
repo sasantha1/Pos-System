@@ -1,0 +1,354 @@
+.rep-page {
+  padding: 18px 16px 26px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  min-height: 100%;
+}
+
+.rep-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.rep-headActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rep-title {
+  font-size: 18px;
+  font-weight: 1000;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.rep-subtitle {
+  margin-top: 6px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.rep-rangeLabel {
+  display: none;
+}
+
+.rep-select {
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0 12px;
+  outline: none;
+  font-weight: 900;
+}
+
+.rep-downloadBtn {
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(34, 197, 94, 0.45);
+  background: rgba(34, 197, 94, 0.14);
+  color: #d1fae5;
+  padding: 0 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.rep-downloadBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.rep-statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.rep-stat {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 14px 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.rep-statTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.rep-statLabel {
+  font-weight: 900;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.rep-cardIcon {
+  width: 18px;
+  height: 18px;
+  color: rgba(34, 197, 94, 0.95);
+}
+
+.rep-statValue {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 1000;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.rep-delta {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(34, 197, 94, 0.95);
+}
+
+.rep-deltaSub {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 800;
+}
+
+.rep-tabs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.rep-tab {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+  font-weight: 1000;
+  font-size: 13px;
+}
+
+.rep-tab.active {
+  background: rgba(99, 102, 241, 0.18);
+  border-color: rgba(99, 102, 241, 0.4);
+  color: rgba(219, 234, 254, 0.95);
+}
+
+.rep-chartsGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14px;
+}
+
+.rep-full {
+  grid-column: 1 / -1;
+}
+
+.rep-chartCard {
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  padding: 14px 14px 16px;
+}
+
+.rep-chartHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.rep-chartTitle {
+  font-size: 13px;
+  font-weight: 1000;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.rep-chartSubtitle {
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.rep-lineChart {
+  width: 100%;
+  height: 230px;
+  display: block;
+}
+
+.rep-donutRow {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rep-donut {
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.rep-legend {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rep-legendRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.rep-legendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 5px;
+  flex: 0 0 auto;
+}
+
+.rep-legendLabel {
+  flex: 1;
+  font-weight: 1000;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+}
+
+.rep-legendValue {
+  font-weight: 1000;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+}
+
+.rep-invSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 8px 2px;
+}
+
+.rep-invRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.rep-invRow strong {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.rep-invDanger {
+  color: #ef4444 !important;
+}
+
+.rep-donutOnly {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.rep-donutLg {
+  width: 260px;
+  max-width: 100%;
+  height: auto;
+}
+
+.rep-miniLegend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rep-miniLegendRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 900;
+}
+
+.rep-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.rep-barRow {
+  display: grid;
+  grid-template-columns: 170px 1fr 90px;
+  align-items: center;
+  gap: 10px;
+}
+
+.rep-barLabel {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.rep-barTrack {
+  height: 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.rep-barFill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #34d399);
+}
+
+.rep-barValue {
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 12px;
+  font-weight: 900;
+  text-align: right;
+}
+
+@media (max-width: 1060px) {
+  .rep-headActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .rep-header {
+    flex-direction: column;
+  }
+
+  .rep-statsRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rep-chartsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .rep-invRow {
+    font-size: 16px;
+  }
+
+  .rep-barRow {
+    grid-template-columns: 120px 1fr 76px;
+  }
+}
+
